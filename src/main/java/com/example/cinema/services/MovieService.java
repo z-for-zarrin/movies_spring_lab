@@ -16,7 +16,6 @@ public class MovieService {
     MovieRepository movieRepository;
 
     public MovieService() {
-
     }
 
     public void logMovie(Movie movie){
