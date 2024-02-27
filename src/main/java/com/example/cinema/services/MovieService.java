@@ -30,4 +30,13 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public void updateMovie(Movie loggedMovie, Movie updatedMovie) {
+
+        loggedMovie.setTitle(updatedMovie.getTitle());
+        loggedMovie.setRating(updatedMovie.getRating());
+        loggedMovie.setDuration(updatedMovie.getDuration());
+
+        movieRepository.save(loggedMovie);
+    }
+
 }

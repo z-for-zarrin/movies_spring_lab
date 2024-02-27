@@ -45,4 +45,13 @@ public class MovieController {
         return new ResponseEntity<>("Movie(s) added successfully!", HttpStatus.CREATED);
     }
 
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<String> updateMovie(@PathVariable long id, @RequestBody Movie updatedMovie) {
+        if(movieService.getMovieById(id).isEmpty()) {
+            return new ResponseEntity<>("ID not found", HttpStatus.BAD_REQUEST);
+        }
+        movieService.updateMovie(movieService.getMovieById(id).get(), updatedMovie);
+        return new ResponseEntity<>(updatedMovie.getTitle() + "updated successfully!", HttpStatus.OK);
+    }
+
 }
