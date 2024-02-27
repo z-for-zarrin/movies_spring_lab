@@ -20,6 +20,9 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies(@RequestParam(defaultValue = "0") int maxDuration) {
+        if (maxDuration < 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         List<Movie> movies = movieService.getMovies(maxDuration);
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
