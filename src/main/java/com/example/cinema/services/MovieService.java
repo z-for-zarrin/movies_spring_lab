@@ -26,8 +26,12 @@ public class MovieService {
         return movieRepository.findById(id);
     }
 
-    public List<Movie> getMovies() {
-        return movieRepository.findAll();
+    public List<Movie> getMovies(int maxDuration) {
+        List<Movie> movies = movieRepository.findAll();
+        if (maxDuration > 0) {
+            movies.removeIf(movie -> movie.getDuration() > maxDuration);
+        }
+        return movies;
     }
 
     public void updateMovie(Movie loggedMovie, Movie updatedMovie) {
