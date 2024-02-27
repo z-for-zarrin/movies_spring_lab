@@ -51,7 +51,17 @@ public class MovieController {
             return new ResponseEntity<>("ID not found", HttpStatus.BAD_REQUEST);
         }
         movieService.updateMovie(movieService.getMovieById(id).get(), updatedMovie);
-        return new ResponseEntity<>(updatedMovie.getTitle() + "updated successfully!", HttpStatus.OK);
+        return new ResponseEntity<>(updatedMovie.getTitle() + " updated successfully!", HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteMovie(@PathVariable long id) {
+        Optional<Movie> movieToDelete = movieService.getMovieById(id);
+        if(movieToDelete.isEmpty()) {
+            return new ResponseEntity<>("ID not found", HttpStatus.BAD_REQUEST);
+        }
+        movieService.deleteMovie(movieToDelete.get());
+        return new ResponseEntity<>(movieToDelete.get().getTitle() + " deleted successfully!", HttpStatus.OK);
     }
 
 }

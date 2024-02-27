@@ -39,4 +39,8 @@ public class MovieService {
         movieRepository.save(loggedMovie);
     }
 
+    public void deleteMovie(Movie movieToDelete) {
+        movieRepository.delete(movieToDelete);
+    }
+
 }
